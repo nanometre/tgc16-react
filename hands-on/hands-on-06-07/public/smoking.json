@@ -6,5 +6,9 @@
     {
         "display":"Non-smoking",
         "value":"non-smoking"
+    },
+    {
+        "display":"Doesn't matter",
+        "value":"doesnt matter"
     }
 ]

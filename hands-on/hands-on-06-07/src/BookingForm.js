@@ -6,7 +6,7 @@ export default class BookingForm extends React.Component {
         firstName: "",
         lastName: "",
         seatings: "",
-        smoking: "",
+        smoking: "smoking",
         appetisers: [],
         allSeatings: [],
         allSmoking: [],
@@ -26,6 +26,7 @@ export default class BookingForm extends React.Component {
     renderForm() {
         return (
             <React.Fragment>
+                <h1>Booking Form</h1>
                 <div>
                     <label>First Name: </label>
                     <input type='text' name="firstName" value={this.state.firstName} onChange={this.updateForm}></input>
@@ -35,17 +36,19 @@ export default class BookingForm extends React.Component {
                     <input type='text' name="lastName" value={this.state.lastName} onChange={this.updateForm}></input>
                 </div>
                 <div>
-                    <label>Seatings: </label>
+                    <label>Select the seating area: </label>
                     {this.renderSeatingRB()}
                 </div>
                 <div>
-                    <label>Smoking: </label>
-                    <select  name="smoking" onChange={this.updateForm} value={this.state.smoking}>
+                    <label>Select the smoking area: </label>
+                    <select  name="smoking" 
+                             onChange={this.updateForm} 
+                             value={this.state.smoking}>
                         {this.renderSmoking()}
                     </select>
                 </div>
                 <div>
-                    <label>Appetisers: </label>
+                    <label>Select the appetiser(s): </label>
                     {this.renderAppetisers()}
                 </div>
             </React.Fragment>
@@ -96,14 +99,13 @@ export default class BookingForm extends React.Component {
     }
 
     updateAppetisers = (evt) => {
-        if (this.state.appetisers.includes(evt.target.value)) {
-            let clone = this.state.appetisers.filter(a=> a !== evt.target.value)
+        if (this.state[evt.target.name].includes(evt.target.value)) {
             this.setState({
-                appetisers: clone
+                [evt.target.name]: this.state.appetisers.filter(a=> a !== evt.target.value)
             })
         } else {
             this.setState({
-                appetisers: [...this.state.appetisers, evt.target.value]
+                [evt.target.name]: [...this.state.appetisers, evt.target.value]
             })
         }
     }
